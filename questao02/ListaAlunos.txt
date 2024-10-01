@@ -1,0 +1,7 @@
+202197369, roberto, psicologia, CONCLUIDO
+202197369, luis, psicologia, CURSANDO
+202197369, luis, computação, CURSANDO
+202197369, cleiton, computação, CONCLUIDO
+202197369, luis, computação, CURSANDO
+202197369, bryan, computação, CONCLUIDO
+202197369, luis, computação, CURSANDO
