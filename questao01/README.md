@@ -5,22 +5,22 @@
 o recurso compartilhado e deverá ser acessada/modificada por três threads: o thread AEsperta, o thread
 AEconomica e o thread AGastadora, concorrentemente.
 
-    -  1. AGastadora: este thread (de atitude voraz) deverá, a cada 3000 milesegundos verificar se há
+    -  1. **AGastadora**: este thread (de atitude voraz) deverá, a cada 3000 milesegundos verificar se há
 saldo suficiente, e retirar 10 reais da sua conta. Este thread deve disputar por dinheiro, com os
 demais threads, concorrentemente.
 
-    -  2. AEsperta: este thread será mais comedido que a anterior: somente a cada 6000
+    -  2. **AEsperta**: este thread será mais comedido que a anterior: somente a cada 6000
 milesegundos, irá verificar o seu saldo. Mas não se engane: se houver saldo suficiente, este
 thread irá retirar 50 reais da sua conta. Este thread deve disputar com outros threads,
 concorrentemente.
 
 
-    -  3. AEconomica: de todos as threads, esta será a que mais prezará por você e suas finanças.
+    -  3. **AEconomica**: de todos as threads, esta será a que mais prezará por você e suas finanças.
 Ela irá verificar o saldo de sua conta apenas a cada 12000 milesegundos. Se houver fundos, a
 thread econômica irá tentar retirar apenas 5 reais da sua conta. Este thread deve disputar com
 outros threads, concorrentemente.
 
-- B) A classe Conta (recurso compartilhado) deverá ter pelo menos:
+- B) A classe **Conta** (recurso compartilhado) deverá ter pelo menos:
 
     - Os seguintes atributos: número da conta, titular da conta e saldo.
 
@@ -32,16 +32,16 @@ conta negativos, etc.).
     - Finalmente, implemente os principais métodos que vão manipular o saldo da conta: deposito e
 saque. Inicie o saldo (recurso compartilhado) da conta depositando uma quantia de R$ 1.000,00.
 
-    - DICA: Faça um esboço de um diagrama inicial de classes para lhe ajudar a pensar melhor antes de
+    - ***DICA***: Faça um esboço de um diagrama inicial de classes para lhe ajudar a pensar melhor antes de
 ir diretamente para o código. O diagrama ajuda você a visualizar quantas classes precisará e como
 elas se relacionam.
 
-    - IMPORTANTE: Sempre que um thread movimentar fundos da sua conta, o sistema deve informar
+    - **IMPORTANTE**: Sempre que um thread movimentar fundos da sua conta, o sistema deve informar
 não apenas qual thread efetuou a operação (saque ou depósito), mas, principalmente, qual é o seu
 saldo atual final (após o saque). Isso permitirá que você acompanhe a situação financeira em tempo
 real.
 
-    - LEMBRE-SE: Nesta aplicação, não defina prioridades (todos devem ter as mesmas chances). Além
+    - **LEMBRE-SE**: Nesta aplicação, não defina prioridades (todos devem ter as mesmas chances). Além
 disso, não permita que haja corrupção de dados (ou seja, cada thread deve conseguir retirar sua
 quantia sem ser interrompido por outro thread materialista). Use synchronized ou outro modelo, por
 exemplo.
