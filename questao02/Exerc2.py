@@ -23,7 +23,7 @@ def encontrar_formandos(diretorio):
     return formandos
 
 if __name__ == "__main__":
-    diretorio_dos_arquivos = r"C:\Users\Roberto Bastos\Downloads\Trabalho Moreno"  # Substitua pelo caminho real do diretório onde os arquivos estão
+    diretorio_dos_arquivos = r"/home/andreprado/AdvanceWeb/progDistConc/progDistConc/questao02"
     formandos = encontrar_formandos(diretorio_dos_arquivos)
     
     for matricula, nome, curso in formandos:
