@@ -1,3 +1,3 @@
 # progDistConc
 
-Repo daora com as questões do Moreno
+Repositório do trabalho de Programação Distribuída e Concorrente.
