@@ -2,11 +2,11 @@ import concurrent.futures
 import time
 
 def get_pipoca():
-    time.sleep(2)
+    time.sleep(6)
     return "Pipoca Pronta"
 
 def get_refrigerante():
-    time.sleep(1.5)
+    time.sleep(4)
     return "Refrigerante Pronto"
 
 def lanche_pronto():
