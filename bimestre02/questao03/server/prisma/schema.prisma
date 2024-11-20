@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model aluno {
+  id        Int    @id(map: "aluno_pk")
+  nome      String @db.VarChar(60)
+  curso     String @db.VarChar
+  email     String @db.VarChar
+  matricula String @unique(map: "aluno_idx") @db.VarChar(9)
+  grupo_id  Int
+  grupo     grupo  @relation(fields: [grupo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_aluno_fk")
+}
+
+model avaliacao {
+  id             Int       @id(map: "avaliacao_pk")
+  nota_avaliacao Float     @db.Real
+  professor_id   Int
+  professor      professor @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "professor_avaliacao_fk")
+  projeto        projeto[]
+}
+
+model grupo {
+  id           Int       @id(map: "grupo_pk")
+  nome_projeto String    @db.VarChar
+  aluno        aluno[]
+  projeto      projeto[]
+}
+
+model professor {
+  id        Int         @id(map: "professor_pk")
+  nome      String      @db.VarChar(60)
+  matricula String      @unique(map: "professor_idx") @db.VarChar
+  email     String      @db.VarChar
+  avaliacao avaliacao[]
+}
+
+model projeto {
+  id                Int       @id(map: "projeto_pk")
+  tema              String    @db.VarChar
+  estande           Int
+  grupo_id          Int
+  data_apresentacao DateTime  @db.Date
+  avaliacao_id      Int
+  avaliacao         avaliacao @relation(fields: [avaliacao_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "avaliacao_projeto_fk")
+  grupo             grupo     @relation(fields: [grupo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_projeto_fk")
+}
