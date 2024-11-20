@@ -13,7 +13,7 @@ import {
 import { CircleDollarSign, Unplug } from 'lucide-react';
 import Link from 'next/link';
 
-export default function CardWithForm() {
+export default function Home() {
   const [real, setReal]: any = useState<string>("")
   const [iene, setIene]: any = useState<string>("")
   const [euro, setEuro]: any = useState<string>("")
