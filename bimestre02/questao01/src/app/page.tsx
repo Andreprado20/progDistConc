@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { CircleDollarSign } from 'lucide-react';
+import { CircleDollarSign, Unplug } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CardWithForm() {
@@ -81,7 +81,7 @@ export default function CardWithForm() {
                     <CircleDollarSign /> Mais Cotações
                   </Link>
                   <Link href="https://www.exchangerate-api.com/" className={buttonVariants({ variant: "ghost" })}>
-                    <CircleDollarSign /> API Utilizada
+                    <Unplug /> API Utilizada
                   </Link>
                 </CardFooter>
               </Card>
