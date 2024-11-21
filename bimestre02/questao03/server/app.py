@@ -1,9 +1,9 @@
 from flask import Flask
-from criptoativo_routes import criptoativo_bp
-from usuario_routes import usuario_bp
-from carteira_routes import carteira_bp
-from carteira_cripto_routes import carteira_cripto_bp
-from transacao_routes import transacao_bp
+from routes.criptoativo_routes import criptoativo_bp
+from routes.usuario_routes import usuario_bp
+from routes.carteira_routes import carteira_bp
+from routes.carteira_cripto_routes import carteira_cripto_bp
+from routes.transacao_routes import transacao_bp
 
 app = Flask(__name__)
 
