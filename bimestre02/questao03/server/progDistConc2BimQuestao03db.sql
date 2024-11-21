@@ -41,8 +41,8 @@ CREATE TABLE "carteira_cripto" (
 -- Tabela de transações
 CREATE TABLE "transacao" (
     "id" SERIAL PRIMARY KEY,
-    "id_carteira_origem" INTEGER,
-    "id_carteira_destino" INTEGER,
+    "id_carteira_origem" INTEGER not null,
+    "id_carteira_destino" INTEGER not null,
     "id_criptoativo" INTEGER NOT NULL,
     "quantidade" DECIMAL(30,8) NOT NULL,
     "tipo" VARCHAR(20) NOT NULL CHECK (tipo IN ('compra', 'venda', 'transferencia')),
@@ -82,8 +82,8 @@ INSERT INTO "carteira_cripto" ("id_carteira", "id_criptoativo", "quantidade") VA
 -- Inserindo transações
 INSERT INTO "transacao" ("id_carteira_origem", "id_carteira_destino", "id_criptoativo", "quantidade", "tipo", "data") VALUES
 (1, 2, 1, 0.1, 'transferencia', '2024-11-01 10:00:00'), -- João transferiu 0.1 BTC para Maria
-(NULL, 1, 3, 3.0, 'compra', '2024-11-05 12:30:00'), -- João comprou 3 LTC
-(3, NULL, 2, 1.0, 'venda', '2024-11-10 14:45:00'); -- Carlos vendeu 1 ETH
+(2, 1, 3, 3.0, 'compra', '2024-11-05 12:30:00'), -- João comprou 3 LTC
+(3, 1, 2, 1.0, 'venda', '2024-11-10 14:45:00'); -- Carlos vendeu 1 ETH
 
 -- Queries de seleção para visualizar os dados
 -- Listar todos os usuários
@@ -122,3 +122,4 @@ FROM "carteira_cripto" cc
 JOIN "criptoativo" cr ON cc.id_criptoativo = cr.id
 WHERE cc.id_carteira = 2;
 
+select * from transacao;
