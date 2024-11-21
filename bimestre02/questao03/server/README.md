@@ -109,12 +109,12 @@ e depois tente rodar o comando "npm run dev" novamente
 ``` 
 echo \"GET ALL Test:\"; echo
 
-curl -X GET http://localhost:3000/professores; echo
+curl -X GET http://localhost:3000/usuarioes; echo
 echo \\
 
 echo \"GET UNIQUE Test:\"; echo
 
-curl -X GET http://localhost:3000/professor/10; echo
+curl -X GET http://localhost:3000/usuario/10; echo
 echo \\
 
 echo \"DELETE Test:\"; echo
@@ -124,7 +124,7 @@ echo \\
 
 echo \"POST Test:\"; echo
 
-curl -X POST http://localhost:3000/professor/post \
+curl -X POST http://localhost:3000/usuario/post \
     -H "Content-Type: application/json" \
     -d '{
     "id": 16,
@@ -136,7 +136,7 @@ echo \\
 
 echo \"PUT Test:\"; echo
 
-curl -X PUT http://localhost:3000/professor/update/16 \
+curl -X PUT http://localhost:3000/usuario/update/16 \
     -H "Content-Type: application/json" \
     -d '{
     "nome": "Andrea Braga Melo",
@@ -173,7 +173,7 @@ Este comando irá rodar o script criado para testes.
 \
 "GET UNIQUE Test:"
 
-{"professor":{"id":10,"nome":"Alice Braga Melo","matricula":"321456987","email":"alice@prisma.mail.com"}}
+{"usuario":{"id":10,"nome":"Alice Braga Melo","matricula":"321456987","email":"alice@prisma.mail.com"}}
 \
 "POST Test:"
 
@@ -185,7 +185,7 @@ Este comando irá rodar o script criado para testes.
 \
 "DELETE Test:"
 
-{"apagaProfessor":{"id":16,"nome":"Andrea Braga Melo","matricula":"322256999","email":"alice@gmailcom"}}
+{"apagausuario":{"id":16,"nome":"Andrea Braga Melo","matricula":"322256999","email":"alice@gmailcom"}}
 \
 ```
 

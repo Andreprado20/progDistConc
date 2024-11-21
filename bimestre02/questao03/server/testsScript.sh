@@ -1,11 +1,11 @@
 echo \"GET ALL Test:\"; echo
 
-curl -X GET http://localhost:3000/professores; echo
+curl -X GET http://localhost:3000/usuarioes; echo
 echo \\
 
 echo \"GET UNIQUE Test:\"; echo
 
-curl -X GET http://localhost:3000/professor/10; echo
+curl -X GET http://localhost:3000/usuario/10; echo
 echo \\
 
 echo \"DELETE Test:\"; echo
@@ -15,7 +15,7 @@ echo \\
 
 echo \"POST Test:\"; echo
 
-curl -X POST http://localhost:3000/professor/postProfessor \
+curl -X POST http://localhost:3000/usuario/postusuario \
     -H "Content-Type: application/json" \
     -d '{
     "id": 16,
@@ -25,7 +25,7 @@ curl -X POST http://localhost:3000/professor/postProfessor \
 }'; echo
 echo \\
 
-curl -X POST http://localhost:3000/professor/postProfessor \
+curl -X POST http://localhost:3000/usuario/postusuario \
     -H "Content-Type: application/json" \
     -d '{
     "id": 17,
@@ -37,7 +37,7 @@ echo \\
 
 echo \"PUT Test:\"; echo
 
-curl -X PUT http://localhost:3000/professor/update/16 \
+curl -X PUT http://localhost:3000/usuario/update/16 \
     -H "Content-Type: application/json" \
     -d '{
     "nome": "Andrea Braga Melo",

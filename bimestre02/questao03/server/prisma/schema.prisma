@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "debian-openssl-3.0.x", "rhel-openssl-3.0.x"]
 }
 
@@ -8,46 +8,53 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model aluno {
-  id        Int    @id(map: "aluno_pk")
-  nome      String @db.VarChar(60)
-  curso     String @db.VarChar
-  email     String @db.VarChar
-  matricula String @unique(map: "aluno_idx") @db.VarChar(9)
-  grupo_id  Int
-  grupo     grupo  @relation(fields: [grupo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_aluno_fk")
+model carteira {
+  id                                                Int               @id @default(autoincrement())
+  nome                                              String            @db.VarChar(255)
+  id_usuario                                        Int
+  usuario                                           usuario           @relation(fields: [id_usuario], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  carteira_cripto                                   carteira_cripto[]
+  transacao_transacao_id_carteira_destinoTocarteira transacao[]       @relation("transacao_id_carteira_destinoTocarteira")
+  transacao_transacao_id_carteira_origemTocarteira  transacao[]       @relation("transacao_id_carteira_origemTocarteira")
 }
 
-model avaliacao {
-  id             Int       @id(map: "avaliacao_pk")
-  nota_avaliacao Float     @db.Real
-  professor_id   Int
-  professor      professor @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "professor_avaliacao_fk")
-  projeto        projeto[]
+model carteira_cripto {
+  id_carteira    Int
+  id_criptoativo Int
+  quantidade     Decimal     @default(0) @db.Decimal(30, 8)
+  carteira       carteira    @relation(fields: [id_carteira], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  criptoativo    criptoativo @relation(fields: [id_criptoativo], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@id([id_carteira, id_criptoativo])
 }
 
-model grupo {
-  id           Int       @id(map: "grupo_pk")
-  nome_projeto String    @db.VarChar
-  aluno        aluno[]
-  projeto      projeto[]
+model criptoativo {
+  id              Int               @id @default(autoincrement())
+  nome            String            @unique @db.VarChar(255)
+  codigo          String            @db.VarChar(10)
+  preco           Decimal           @db.Decimal(30, 8)
+  carteira_cripto carteira_cripto[]
+  transacao       transacao[]
 }
 
-model professor {
-  id        Int         @id(map: "professor_pk")
-  nome      String      @db.VarChar(60)
-  matricula String      @unique(map: "professor_idx") @db.VarChar
-  email     String      @db.VarChar
-  avaliacao avaliacao[]
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model transacao {
+  id                                               Int         @id @default(autoincrement())
+  id_carteira_origem                               Int
+  id_carteira_destino                              Int
+  id_criptoativo                                   Int
+  quantidade                                       Decimal     @db.Decimal(30, 8)
+  tipo                                             String      @db.VarChar(20)
+  data                                             DateTime    @default(now()) @db.Timestamp(6)
+  carteira_transacao_id_carteira_destinoTocarteira carteira    @relation("transacao_id_carteira_destinoTocarteira", fields: [id_carteira_destino], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  carteira_transacao_id_carteira_origemTocarteira  carteira    @relation("transacao_id_carteira_origemTocarteira", fields: [id_carteira_origem], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  criptoativo                                      criptoativo @relation(fields: [id_criptoativo], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model projeto {
-  id                Int       @id(map: "projeto_pk")
-  tema              String    @db.VarChar
-  estande           Int
-  grupo_id          Int
-  data_apresentacao DateTime  @db.Date
-  avaliacao_id      Int
-  avaliacao         avaliacao @relation(fields: [avaliacao_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "avaliacao_projeto_fk")
-  grupo             grupo     @relation(fields: [grupo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_projeto_fk")
+model usuario {
+  id       Int        @id @default(autoincrement())
+  nome     String     @db.VarChar(255)
+  login    String     @unique @db.VarChar(50)
+  senha    String     @db.VarChar(20)
+  carteira carteira[]
 }
