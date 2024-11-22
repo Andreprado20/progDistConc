@@ -10,7 +10,7 @@ def get_criptoativos():
     cripto_id = request.args.get('id')  # Optional ID query param
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
@@ -41,7 +41,7 @@ def create_criptoativo():
 
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
@@ -70,7 +70,7 @@ def update_criptoativo(id):
 
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
@@ -80,7 +80,7 @@ def update_criptoativo(id):
             )
             conn.commit()
         conn.close()
-        return jsonify({"message": "Criptoativo updated successfully"}), 200
+        return jsonify({"message": "Criptoativo atualizada com sucesso!"}), 200
     except Exception as e:
         conn.close()
         return jsonify({"error": str(e)}), 500
@@ -90,14 +90,14 @@ def update_criptoativo(id):
 def delete_criptoativo(id):
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
             cur.execute("DELETE FROM criptoativo WHERE id = %s;", (id,))
             conn.commit()
         conn.close()
-        return jsonify({"message": "Criptoativo deleted successfully"}), 200
+        return jsonify({"message": "Criptoativo apagada com sucesso!"}), 200
     except Exception as e:
         conn.close()
         return jsonify({"error": str(e)}), 500

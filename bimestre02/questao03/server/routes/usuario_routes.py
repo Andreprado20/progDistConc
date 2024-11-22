@@ -6,16 +6,23 @@ usuario_bp = Blueprint('usuario', __name__)
 # GET endpoint to retrieve all users
 @usuario_bp.route('/usuarios', methods=['GET'])
 def get_users():
+    usuario_id = request.args.get('id')
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
-            cur.execute("SELECT * FROM usuario;")
-            users = cur.fetchall()
+            if usuario_id:
+                cur.execute("SELECT * FROM usuario WHERE id = %s;", (usuario_id))
+                user = cur.fetchone()
+                if not user:
+                    return jsonify({"error" : "Usuário não encontrado!"}), 404
+            else:    
+                cur.execute("SELECT * FROM usuario;")
+                user = cur.fetchall()
         conn.close()
-        return jsonify(users), 200
+        return jsonify(user), 200
     except Exception as e:
         conn.close()
         return jsonify({"error": str(e)}), 500
@@ -33,7 +40,7 @@ def add_user():
 
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:

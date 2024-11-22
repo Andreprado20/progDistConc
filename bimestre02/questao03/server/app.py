@@ -41,7 +41,7 @@ app.register_blueprint(historico_transacao_bp, url_prefix='/api')
 # def get_users():
 #     conn = get_db_connection()
 #     if not conn:
-#         return jsonify({"error": "Unable to connect to the database"}), 500
+#         return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
 #     try:
 #         with conn.cursor() as cur:
@@ -66,7 +66,7 @@ app.register_blueprint(historico_transacao_bp, url_prefix='/api')
 
 #     conn = get_db_connection()
 #     if not conn:
-#         return jsonify({"error": "Unable to connect to the database"}), 500
+#         return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
 #     try:
 #         with conn.cursor() as cur:
@@ -92,7 +92,7 @@ app.register_blueprint(historico_transacao_bp, url_prefix='/api')
 #     carteira_id = request.args.get('id')  # Optional ID query param
 #     conn = get_db_connection()
 #     if not conn:
-#         return jsonify({"error": "Unable to connect to the database"}), 500
+#         return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
 #     try:
 #         with conn.cursor() as cur:
@@ -122,7 +122,7 @@ app.register_blueprint(historico_transacao_bp, url_prefix='/api')
 
 #     conn = get_db_connection()
 #     if not conn:
-#         return jsonify({"error": "Unable to connect to the database"}), 500
+#         return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
 #     try:
 #         with conn.cursor() as cur:

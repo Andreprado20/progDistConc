@@ -11,7 +11,7 @@ def get_carteira_cripto():
     criptoativo_id = request.args.get('id_criptoativo')
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
@@ -58,7 +58,7 @@ def create_carteira_cripto():
 
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
@@ -89,7 +89,7 @@ def update_carteira_cripto():
 
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
@@ -103,7 +103,7 @@ def update_carteira_cripto():
             )
             conn.commit()
         conn.close()
-        return jsonify({"message": "Relation updated successfully"}), 200
+        return jsonify({"message": "Relation atualizada com sucesso!"}), 200
     except Exception as e:
         conn.close()
         return jsonify({"error": str(e)}), 500
@@ -120,7 +120,7 @@ def delete_carteira_cripto():
 
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
@@ -133,7 +133,7 @@ def delete_carteira_cripto():
             )
             conn.commit()
         conn.close()
-        return jsonify({"message": "Relation deleted successfully"}), 200
+        return jsonify({"message": "Relation apagada com sucesso!"}), 200
     except Exception as e:
         conn.close()
         return jsonify({"error": str(e)}), 500

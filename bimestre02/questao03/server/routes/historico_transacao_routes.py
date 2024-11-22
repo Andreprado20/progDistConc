@@ -8,7 +8,7 @@ def getHistoricoTransacoes():
     historicoTransacaoId = request.args.get('id')
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
     
     try:
         with conn.cursor() as cur:
@@ -27,7 +27,7 @@ def getHistoricoTransacoes():
                                 WHERE t.id = %s; """, (historicoTransacaoId,))
                 historico_transacao = cur.fetchone()
                 if not historico_transacao:
-                    return jsonify({"error": "Transaction not found"}), 404
+                    return jsonify({"error": "Transação não Encontrada!"}), 404
             else:
                 cur.execute(""" SELECT t.id AS transacao_id, 
                                     co.nome AS carteira_origem, 

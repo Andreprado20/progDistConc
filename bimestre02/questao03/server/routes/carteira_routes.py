@@ -10,7 +10,7 @@ def get_carteiras():
     carteira_id = request.args.get('id')  # Optional ID query param
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
@@ -34,7 +34,7 @@ def get_carteiras():
 #     carteira_id = request.args.get('id')  # Optional ID query param
 #     conn = get_db_connection()
 #     if not conn:
-#         return jsonify({"error": "Unable to connect to the database"}), 500
+#         return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
 #     try:
 #         with conn.cursor() as cur:
@@ -65,7 +65,7 @@ def create_carteira():
 
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
@@ -93,7 +93,7 @@ def update_carteira(id):
 
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
@@ -103,7 +103,7 @@ def update_carteira(id):
             )
             conn.commit()
         conn.close()
-        return jsonify({"message": "Carteira updated successfully"}), 200
+        return jsonify({"message": "Carteira atualizada com sucesso!"}), 200
     except Exception as e:
         conn.close()
         return jsonify({"error": str(e)}), 500
@@ -113,14 +113,14 @@ def update_carteira(id):
 def delete_carteira(id):
     conn = get_db_connection()
     if not conn:
-        return jsonify({"error": "Unable to connect to the database"}), 500
+        return jsonify({"error": "Não foi possível se conectar ao Banco de Dados!"}), 500
 
     try:
         with conn.cursor() as cur:
             cur.execute("DELETE FROM carteira WHERE id = %s;", (id,))
             conn.commit()
         conn.close()
-        return jsonify({"message": "Carteira deleted successfully"}), 200
+        return jsonify({"message": "Carteira apagada com sucesso!"}), 200
     except Exception as e:
         conn.close()
         return jsonify({"error": str(e)}), 500
