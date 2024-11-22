@@ -4,7 +4,7 @@ from database import get_db_connection
 usuario_bp = Blueprint('usuario', __name__)
 
 # GET endpoint to retrieve all users
-@usuario_bp.route('/users', methods=['GET'])
+@usuario_bp.route('/usuarios', methods=['GET'])
 def get_users():
     conn = get_db_connection()
     if not conn:
@@ -21,7 +21,7 @@ def get_users():
         return jsonify({"error": str(e)}), 500
 
 # POST endpoint to add a new user
-@usuario_bp.route('/users', methods=['POST'])
+@usuario_bp.route('/usuarios', methods=['POST'])
 def add_user():
     data = request.get_json()
     nome = data.get("nome")

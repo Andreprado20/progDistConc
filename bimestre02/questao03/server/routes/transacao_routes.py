@@ -5,7 +5,7 @@ from database import get_db_connection
 transacao_bp = Blueprint('transacao', __name__)
 
 # GET all transactions or specific by ID
-@transacao_bp.route('/transacoes', methods=['GET'])
+@transacao_bp.route('/transacao', methods=['GET'])
 def get_transacoes():
     transacao_id = request.args.get('id')  # Optional ID query param
     conn = get_db_connection()
@@ -21,15 +21,15 @@ def get_transacoes():
                     return jsonify({"error": "Transaction not found"}), 404
             else:
                 cur.execute("SELECT * FROM transacao;")
-                transacoes = cur.fetchall()
+                transacao = cur.fetchall()
         conn.close()
-        return jsonify(transacoes), 200
+        return jsonify(transacao), 200
     except Exception as e:
         conn.close()
         return jsonify({"error": str(e)}), 500
 
 # POST: Create a new transaction
-@transacao_bp.route('/transacoes', methods=['POST'])
+@transacao_bp.route('/transacao', methods=['POST'])
 def create_transacao():
     data = request.get_json()
     id_carteira_origem = data.get("id_carteira_origem")
@@ -66,7 +66,7 @@ def create_transacao():
         return jsonify({"error": str(e)}), 500
 
 # PUT: Update an existing transaction
-@transacao_bp.route('/transacoes/<int:id>', methods=['PUT'])
+@transacao_bp.route('/transacao/<int:id>', methods=['PUT'])
 def update_transacao(id):
     data = request.get_json()
     id_carteira_origem = data.get("id_carteira_origem")
@@ -104,7 +104,7 @@ def update_transacao(id):
         return jsonify({"error": str(e)}), 500
 
 # DELETE: Remove a transaction
-@transacao_bp.route('/transacoes/<int:id>', methods=['DELETE'])
+@transacao_bp.route('/transacao/<int:id>', methods=['DELETE'])
 def delete_transacao(id):
     conn = get_db_connection()
     if not conn:
