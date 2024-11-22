@@ -3,10 +3,10 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 import os
 from dotenv import load_dotenv
-from carteira_routes import carteira_bp
+from routes.carteira_routes import carteira_bp
 from database import get_db_connection
-from criptoativo_routes import criptoativo_bp
-from usuario_routes import usuario_bp
+from routes.criptoativo_routes import criptoativo_bp
+from routes.usuario_routes import usuario_bp
 
 
 # Load environment variables
