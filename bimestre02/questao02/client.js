@@ -59,7 +59,7 @@ function login(nickname) {
                     return [3 /*break*/, 3];
                 case 2:
                     error_1 = _a.sent();
-                    console.error("Erro ao conectar ao servidor:", error_1.message);
+                    console.error("Erro ao conectar ao servidor:");
                     return [2 /*return*/, null];
                 case 3: return [2 /*return*/];
             }
@@ -85,7 +85,7 @@ function getHoroscope(nickname, sign) {
                     return [3 /*break*/, 3];
                 case 2:
                     error_2 = _a.sent();
-                    console.error("Erro ao conectar ao servidor:", error_2.message);
+                    console.error("Erro ao conectar ao servidor:");
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
@@ -93,16 +93,16 @@ function getHoroscope(nickname, sign) {
     });
 }
 (function () { return __awaiter(void 0, void 0, void 0, function () {
-    var nickname, sign, plan;
+    var nickname, sign, plan1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                nickname = "zodiac_master";
+                nickname = "astrologoCanadense";
                 sign = "aries";
                 return [4 /*yield*/, login(nickname)];
             case 1:
-                plan = _a.sent();
-                if (!plan) return [3 /*break*/, 3];
+                plan1 = _a.sent();
+                if (!plan1) return [3 /*break*/, 3];
                 return [4 /*yield*/, getHoroscope(nickname, sign)];
             case 2:
                 _a.sent();

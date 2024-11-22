@@ -5,14 +5,13 @@ app = Flask(__name__)
 # Base de dados simples
 users = {
     "astrologoCanadense": {"nickname": "astrologoCanadense666", "plan": "basic"},
-    "mestreZodiaco": {"nickname": "mestreZodiaco123", "plan": "advanced"},
+    "mestreZodiaco": {"nickname": "mestreZodiaco", "plan": "advanced"},
 }
 
 horoscopes = {
     "aries": {"message": "A energia está a seu favor hoje!", "lucky_number": 12},
     "touro": {"message": "Evite decisões impulsivas.", "lucky_number": 7},
     "sagitario":{"message": "Todos os astros se alinharam ao seu favor!", "lucky_number": 20}
-
     # Adicione outros signos aqui...
 }
 
