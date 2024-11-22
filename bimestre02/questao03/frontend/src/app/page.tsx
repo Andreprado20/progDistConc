@@ -28,7 +28,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const API_BASE_URL = "http://127.0.0.1:4000/api";
 
-type Entity = "usuarios" | "carteiras" | "criptoativos" | "carteira_cripto" | "transacoes";
+type Entity = "usuarios" | "carteiras" | "criptoativos" | "historico_transacao" | "transacao" ;
 
 interface FormData {
   [key: string]: string | number;
@@ -107,11 +107,11 @@ export default function Home() {
 
   const renderForm = () => {
     const fields: { [key in Entity]: string[] } = {
-      usuarios: ["nome", "login", "senha"],
+      usuarios: ["nome", "login"],
       carteiras: ["nome", "id_usuario"],
       criptoativos: ["nome", "codigo", "preco"],
-      carteira_cripto: ["id_carteira", "id_criptoativo", "quantidade"],
-      transacoes: ["id_carteira_origem", "id_carteira_destino", "id_criptoativo", "quantidade", "tipo"],
+      historico_transacao: ["id_carteira", "id_criptoativo", "quantidade"],
+      transacao: ["id_carteira_origem", "id_carteira_destino", "id_criptoativo", "quantidade", "tipo"],
     };
 
     return (
@@ -119,7 +119,7 @@ export default function Home() {
         {fields[activeTab].map((field) => (
           <div key={field}>
             <Label htmlFor={field}>{field}</Label>
-            {field === "tipo" && activeTab === "transacoes" ? (
+            {field === "tipo" && activeTab === "transacao" ? (
               <Select
                 value={formData[field] as string}
                 onValueChange={(value) => setFormData({ ...formData, [field]: value })}
@@ -194,16 +194,16 @@ export default function Home() {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Crypto Wallet Manager</h1>
+      <h1 className="text-3xl font-bold mb-4">Gerenciador de Carteira de Criptomoedas</h1>
       <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as Entity)}>
         <TabsList>
-          <TabsTrigger value="usuarios">Users</TabsTrigger>
-          <TabsTrigger value="carteiras">Wallets</TabsTrigger>
-          <TabsTrigger value="criptoativos">Crypto Assets</TabsTrigger>
-          <TabsTrigger value="carteira_cripto">Wallet-Crypto</TabsTrigger>
-          <TabsTrigger value="transacoes">Transactions</TabsTrigger>
+          <TabsTrigger value="usuarios">Usuários</TabsTrigger>
+          <TabsTrigger value="carteiras">Carteiras</TabsTrigger>
+          <TabsTrigger value="criptoativos">Criptoativos</TabsTrigger>
+          <TabsTrigger value="historico_transacao">Histórico de Transações</TabsTrigger>
+          <TabsTrigger value="transacao">Transações</TabsTrigger>          
         </TabsList>
-        {["usuarios", "carteiras", "criptoativos", "carteira_cripto", "transacoes"].map((tab) => (
+        {["usuarios", "carteiras", "criptoativos", "historico_transacao", "transacao"].map((tab) => (
           <TabsContent key={tab} value={tab}>
             <Card>
               <CardHeader>
@@ -217,7 +217,7 @@ export default function Home() {
                           setIsEditing(false);
                           setEditId(null);
                         }}>
-                          Add New
+                          Novo
                         </Button>
                       </DialogTrigger>
                       <DialogContent>
