@@ -1,4 +1,3 @@
-// app/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
@@ -24,8 +23,10 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const API_BASE_URL = "https://prog-dist-conc03.vercel.app/api";
+const API_BASE_URL = "http://127.0.0.1:4000/api";
 
 type Entity = "usuarios" | "carteiras" | "criptoativos" | "carteira_cripto" | "transacoes";
 
@@ -40,27 +41,35 @@ export default function Home() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchData(activeTab);
   }, [activeTab]);
 
   const fetchData = async (entity: Entity) => {
+    setIsLoading(true);
     try {
       const response = await axios.get(`${API_BASE_URL}/${entity}`);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
+      toast.error(`Failed to fetch ${entity} data. Please try again.`);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
       if (isEditing) {
         await axios.put(`${API_BASE_URL}/${activeTab}/${editId}`, formData);
+        toast.success("Item updated successfully!");
       } else {
         await axios.post(`${API_BASE_URL}/${activeTab}`, formData);
+        toast.success("Item created successfully!");
       }
       fetchData(activeTab);
       setIsDialogOpen(false);
@@ -69,15 +78,23 @@ export default function Home() {
       setEditId(null);
     } catch (error) {
       console.error("Error submitting data:", error);
+      toast.error("Failed to submit data. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleDelete = async (id: number) => {
+    setIsLoading(true);
     try {
       await axios.delete(`${API_BASE_URL}/${activeTab}/${id}`);
+      toast.success("Item deleted successfully!");
       fetchData(activeTab);
     } catch (error) {
       console.error("Error deleting data:", error);
+      toast.error("Failed to delete item. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -126,12 +143,15 @@ export default function Home() {
             )}
           </div>
         ))}
-        <Button type="submit">{isEditing ? "Update" : "Create"}</Button>
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? "Processing..." : (isEditing ? "Update" : "Create")}
+        </Button>
       </form>
     );
   };
 
   const renderTable = () => {
+    if (isLoading) return <p>Loading...</p>;
     if (data.length === 0) return <p>No data available.</p>;
 
     const columns = Object.keys(data[0]);
@@ -215,6 +235,7 @@ export default function Home() {
           </TabsContent>
         ))}
       </Tabs>
+      <ToastContainer />
     </div>
   );
 }
