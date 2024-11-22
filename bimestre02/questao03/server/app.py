@@ -16,4 +16,4 @@ app.register_blueprint(transacao_bp, url_prefix='/api')
 app.register_blueprint(historico_transacao_bp, url_prefix='/api')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
