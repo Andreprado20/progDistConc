@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-# Base de dados simples
 users = {
     "astrologoCanadense": {"nickname": "astrologoCanadense666", "plan": "basic"},
     "mestreZodiaco": {"nickname": "mestreZodiaco", "plan": "advanced"},
@@ -12,10 +11,8 @@ horoscopes = {
     "aries": {"message": "A energia está a seu favor hoje!", "lucky_number": 12},
     "touro": {"message": "Evite decisões impulsivas.", "lucky_number": 7},
     "sagitario":{"message": "Todos os astros se alinharam ao seu favor!", "lucky_number": 20}
-    # Adicione outros signos aqui...
 }
 
-# Rota de autenticação simples
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
@@ -25,7 +22,6 @@ def login():
         return jsonify({"success": True, "message": "Usuário autenticado!", "plan": user["plan"]}), 200
     return jsonify({"success": False, "message": "Usuário não encontrado!"}), 404
 
-# Rota para consultar o horóscopo
 @app.route('/horoscope', methods=['POST'])
 def get_horoscope():
     data = request.json
@@ -50,7 +46,7 @@ def get_horoscope():
 def create_user():
     data = request.json
     nickname = data.get('nickname')
-    plan = data.get('plan', 'basic')  # O plano padrão é 'basic'
+    plan = data.get('plan', 'basic')  
     
     if not nickname or nickname in users:
         return jsonify({"success": False, "message": "Nickname inválido ou já existente!"}), 400
