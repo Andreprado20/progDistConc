@@ -2,6 +2,20 @@ import axios from 'axios';
 
 const API_URL = "http://127.0.0.1:5000";
 
+
+async function createUser(nickname: string, plan: string) {
+    try {
+        const response = await axios.post(`${API_URL}/create_user`, { nickname, plan });
+        if (response.data.success) {
+            console.log(response.data.message);
+        } else {
+            console.error(response.data.message);
+        }
+    } catch (error) {
+        console.error("Erro ao conectar ao servidor para criar usuário:");
+    }
+}
+
 async function login(nickname: string) {
     try {
         const response = await axios.post(`${API_URL}/login`, { nickname });
@@ -32,6 +46,34 @@ async function getHoroscope(nickname: string, sign: string) {
 }
 
 (async () => {
+    // const nickname = "astrologoCanadense"; // Substitua pelo nickname desejado
+    // const sign = "aries"; // Substitua pelo signo desejado
+
+    // // const nickname2 = "astrologoCanadense666"; // Substitua pelo nickname desejado
+    // // const sign2 = "sagitario"; // Substitua pelo signo desejado
+
+    // const plan1 = await login(nickname);
+    // // const plan2 = await login(nickname2)
+    // if (plan1) {
+    //     await getHoroscope(nickname, sign);
+    // }
+
+    // // if(plan2){
+    // //     await getHoroscope(nickname2, sign2);
+    // // }
+
+    const newNickname = "estrelaNova";
+    const newPlan = "advanced";
+    await createUser(newNickname, newPlan);
+    const plan = await login(newNickname);
+    if (plan) {
+        const sign = "aries"; 
+        await getHoroscope(newNickname, sign);
+        }
+    }
+)();
+
+(async ()=>{
     const nickname = "astrologoCanadense"; // Substitua pelo nickname desejado
     const sign = "aries"; // Substitua pelo signo desejado
 

@@ -38,9 +38,35 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = require("axios");
 var API_URL = "http://127.0.0.1:5000";
-function login(nickname) {
+function createUser(nickname, plan) {
     return __awaiter(this, void 0, void 0, function () {
         var response, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, axios_1.default.post("".concat(API_URL, "/create_user"), { nickname: nickname, plan: plan })];
+                case 1:
+                    response = _a.sent();
+                    if (response.data.success) {
+                        console.log(response.data.message);
+                    }
+                    else {
+                        console.error(response.data.message);
+                    }
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_1 = _a.sent();
+                    console.error("Erro ao conectar ao servidor para criar usuário:");
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function login(nickname) {
+    return __awaiter(this, void 0, void 0, function () {
+        var response, error_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -58,7 +84,7 @@ function login(nickname) {
                     }
                     return [3 /*break*/, 3];
                 case 2:
-                    error_1 = _a.sent();
+                    error_2 = _a.sent();
                     console.error("Erro ao conectar ao servidor:");
                     return [2 /*return*/, null];
                 case 3: return [2 /*return*/];
@@ -68,7 +94,7 @@ function login(nickname) {
 }
 function getHoroscope(nickname, sign) {
     return __awaiter(this, void 0, void 0, function () {
-        var response, error_2;
+        var response, error_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -84,7 +110,7 @@ function getHoroscope(nickname, sign) {
                     }
                     return [3 /*break*/, 3];
                 case 2:
-                    error_2 = _a.sent();
+                    error_3 = _a.sent();
                     console.error("Erro ao conectar ao servidor:");
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
@@ -92,6 +118,29 @@ function getHoroscope(nickname, sign) {
         });
     });
 }
+(function () { return __awaiter(void 0, void 0, void 0, function () {
+    var newNickname, newPlan, plan, sign;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                newNickname = "estrelaNova";
+                newPlan = "advanced";
+                return [4 /*yield*/, createUser(newNickname, newPlan)];
+            case 1:
+                _a.sent();
+                return [4 /*yield*/, login(newNickname)];
+            case 2:
+                plan = _a.sent();
+                if (!plan) return [3 /*break*/, 4];
+                sign = "aries";
+                return [4 /*yield*/, getHoroscope(newNickname, sign)];
+            case 3:
+                _a.sent();
+                _a.label = 4;
+            case 4: return [2 /*return*/];
+        }
+    });
+}); })();
 (function () { return __awaiter(void 0, void 0, void 0, function () {
     var nickname, sign, plan1;
     return __generator(this, function (_a) {
