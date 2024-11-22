@@ -46,22 +46,6 @@ async function getHoroscope(nickname: string, sign: string) {
 }
 
 (async () => {
-    // const nickname = "astrologoCanadense"; // Substitua pelo nickname desejado
-    // const sign = "aries"; // Substitua pelo signo desejado
-
-    // // const nickname2 = "astrologoCanadense666"; // Substitua pelo nickname desejado
-    // // const sign2 = "sagitario"; // Substitua pelo signo desejado
-
-    // const plan1 = await login(nickname);
-    // // const plan2 = await login(nickname2)
-    // if (plan1) {
-    //     await getHoroscope(nickname, sign);
-    // }
-
-    // // if(plan2){
-    // //     await getHoroscope(nickname2, sign2);
-    // // }
-
     const newNickname = "estrelaNova";
     const newPlan = "advanced";
     await createUser(newNickname, newPlan);
@@ -74,19 +58,10 @@ async function getHoroscope(nickname: string, sign: string) {
 )();
 
 (async ()=>{
-    const nickname = "astrologoCanadense"; // Substitua pelo nickname desejado
-    const sign = "aries"; // Substitua pelo signo desejado
-
-    // const nickname2 = "astrologoCanadense666"; // Substitua pelo nickname desejado
-    // const sign2 = "sagitario"; // Substitua pelo signo desejado
-
+    const nickname = "astrologoCanadense"; 
+    const sign = "aries"; 
     const plan1 = await login(nickname);
-    // const plan2 = await login(nickname2)
     if (plan1) {
         await getHoroscope(nickname, sign);
     }
-
-    // if(plan2){
-    //     await getHoroscope(nickname2, sign2);
-    // }
 })();
