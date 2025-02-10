@@ -18,7 +18,7 @@ def get_carteira_cripto():
             if carteira_id and criptoativo_id:
                 cur.execute(
                     """
-                    SELECT * FROM carteira_cripto 
+                    SELECT id, nome, login FROM carteira_cripto 
                     WHERE id_carteira = %s AND id_criptoativo = %s;
                     """,
                     (carteira_id, criptoativo_id),
