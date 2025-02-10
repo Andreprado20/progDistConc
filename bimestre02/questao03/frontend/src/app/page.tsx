@@ -107,7 +107,7 @@ export default function Home() {
 
   const renderForm = () => {
     const fields: { [key in Entity]: string[] } = {
-      usuarios: ["nome", "login"],
+      usuarios: ["nome", "login", "senha"],
       carteiras: ["nome", "id_usuario"],
       criptoativos: ["nome", "codigo", "preco"],
       historico_transacao: ["id_carteira", "id_criptoativo", "quantidade"],
