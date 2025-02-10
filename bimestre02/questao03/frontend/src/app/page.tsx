@@ -136,6 +136,7 @@ export default function Home() {
             ) : (
               <Input
                 id={field}
+                type={field === "senha" ? "password" : "text"}
                 value={formData[field] || ""}
                 onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
                 required
