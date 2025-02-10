@@ -55,7 +55,7 @@ def add_user():
             user_id = cur.fetchone()["id"]
             conn.commit()
         conn.close()
-        return jsonify({"message": "User added successfully", "id": user_id}), 201
+        return jsonify({"message": "Usuário adicionado com sucesso!", "id": user_id}), 201
     except Exception as e:
         conn.close()
         return jsonify({"error": str(e)}), 500
