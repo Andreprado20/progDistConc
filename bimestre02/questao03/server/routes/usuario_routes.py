@@ -14,12 +14,12 @@ def get_users():
     try:
         with conn.cursor() as cur:
             if usuario_id:
-                cur.execute("SELECT * FROM usuario WHERE id = %s;", (usuario_id))
+                cur.execute("SELECT id, nome, login FROM usuario WHERE id = %s;", (usuario_id))
                 user = cur.fetchone()
                 if not user:
                     return jsonify({"error" : "Usuário não encontrado!"}), 404
             else:    
-                cur.execute("SELECT * FROM usuario;")
+                cur.execute("SELECT id, nome, login FROM usuario;")
                 user = cur.fetchall()
         conn.close()
         return jsonify(user), 200
