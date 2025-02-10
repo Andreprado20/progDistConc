@@ -51,7 +51,7 @@ async function getHoroscope(nickname: string, sign: string) {
     await createUser(newNickname, newPlan);
     const plan = await login(newNickname);
     if (plan) {
-        const sign = "aries"; 
+        const sign = "sagitario"; 
         await getHoroscope(newNickname, sign);
         }
     }
